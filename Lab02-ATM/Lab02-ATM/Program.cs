@@ -10,8 +10,17 @@ namespace Lab02_ATM
             bool displayMenu = true;
             while (displayMenu)
             {
-                MainMenu();
-            }
+                Console.WriteLine("Do you want to use the ATM? y/n");
+                string start = Console.ReadLine();
+                if (start == "y")
+                {
+                    MainMenu();
+                }
+                else if (start == "n")
+                {
+                    Environment.Exit(0);
+                }
+        }
         }
 
         static void MainMenu()
@@ -19,36 +28,40 @@ namespace Lab02_ATM
             Console.Clear();
             try
             {
-                Console.WriteLine("Do you want to use the ATM? y/n");
-                string start = Console.ReadLine();
-                if (start == "y")
-                {
+
                     Console.Clear();
                     Console.WriteLine("What transaction would you like to make?");
                     Console.WriteLine();
                     Console.WriteLine("1) View Balance ");
                     Console.WriteLine("2) Withdraw Money");
                     Console.WriteLine("3) Deposit Money ");
+                    Console.WriteLine("4) Exit");
+
                     string input = Console.ReadLine();
 
                     switch (input)
                     {
                         case "1":
-                            ViewBalance();
+                            decimal vBalance = ViewBalance();
+                            Console.WriteLine($"Current balance: ${vBalance}");
                             Console.ReadLine();
                             break;
                         case "2":
-                            WithdrawMoney();
+                            decimal wMoney = WithdrawMoney();
+                            Console.WriteLine($"Current balance: ${wMoney}");
                             Console.ReadLine();
                             break;
                         case "3":
-                            DepositMoney();
-                            Console.ReadLine();
+                        decimal dMoney = DepositMoney();
+                        Console.WriteLine($"Current balance: ${dMoney}");
+                        Console.ReadLine();
+                        break;
+                        case "4":
+                            Environment.Exit(0);
+
                             break;
                     }
-                }
-                else if (start == "n")
-                    Environment.Exit(0);
+
             }
             catch (Exception e)
             {
@@ -60,56 +73,77 @@ namespace Lab02_ATM
         public static decimal ViewBalance()
         {
             decimal currentBalance = Balance;
-            Console.WriteLine($"Current balance: ${currentBalance}");
             return currentBalance;
         }
-        public static decimal WithdrawMoney()
+        public static decimal GetWithdrawMoney()
         {
-            decimal newBalance = Balance;
+   
             try
             {
                 Console.WriteLine("How much money would you like to withdraw?");
                 string input = Console.ReadLine();
+                decimal invalid = 0;
                 decimal withdraw = Int32.Parse(input);
-                if (Balance - withdraw > 0)
-                    Balance = Balance - withdraw;
-                else if (Balance - withdraw < 0)
-                    Console.WriteLine("I'm sorry but the follow transactin will result in negative balance. Please deposit money first.");
-                return newBalance;
+                if (withdraw < 0)
+                {
+                    Console.WriteLine("I'm sorry but you cannot withdraw negatively. Try again.");
+                    return invalid;
+                }
+                else
+                {
+                    return withdraw;
+                }
             }
             catch (Exception e)
             {
                 throw;
-               
             }
-            finally
-            {
-                Console.WriteLine($"You're current account balance is ${Balance}.");
-            }
-
         }
 
-        public static decimal DepositMoney()
+        public static decimal WithdrawMoney()
         {
+            decimal withdraw = GetWithdrawMoney();
+            if (Balance - withdraw > 0)
+            {
+                Balance = Balance - withdraw;
+            }
+            else if (Balance - withdraw < 0)
+            {
+                Console.WriteLine("I'm sorry but the follow transactin will result in negative balance. Please deposit money first.");
+            }
+            return Balance;
+        }
+
+        public static decimal GetDepositMoney()
+        {
+      
             try
             {
                 Console.WriteLine("How much money would you like to deposit?");
                 string input = Console.ReadLine();
+                decimal invalid = 0;
                 decimal deposit = Int32.Parse(input);
-                Balance = Balance + deposit;
-                return Balance;
+                if (deposit < 0)
+                {
+                    Console.WriteLine("I'm sorry but you cannot withdraw negatively. Try again.");
+                    return invalid;
+                }
+                else
+                {
+                    return deposit;
+                }
             }
             catch (Exception e)
             {
                 throw;
-                
             }
-            finally
-            {
-                Console.WriteLine($"You're current account balance is ${Balance}.");
-                
-            }
-            
+        }
+        public static decimal DepositMoney()
+        {
+
+                decimal deposit = GetDepositMoney();
+                Balance = Balance + deposit;
+                return Balance;         
         }
     }
 }
