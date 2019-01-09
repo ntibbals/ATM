@@ -17,37 +17,44 @@ namespace Lab02_ATM
         static void MainMenu()
         {
             Console.Clear();
-            Console.WriteLine("Do you want to use the ATM? y/n");
-            string start = Console.ReadLine();
-            if (start == "y")
+            try
             {
-                Console.Clear();
-                Console.WriteLine("What transaction would you like to make?");
-                Console.WriteLine();
-                Console.WriteLine("1) View Balance ");
-                Console.WriteLine("2) Withdraw Money");
-                Console.WriteLine("3) Deposit Money ");
-                string input = Console.ReadLine();
-
-                switch (input)
+                Console.WriteLine("Do you want to use the ATM? y/n");
+                string start = Console.ReadLine();
+                if (start == "y")
                 {
-                    case "1":
-                        ViewBalance();
-                        Console.ReadLine();
-                        break;
-                    case "2":
-                        WithdrawMoney();
-                        Console.WriteLine($"You're current account balance is ${Balance}.");
-                        Console.ReadLine();
-                        break;
-                    case "3":
-                        DepositMoney();
-                        Console.ReadLine();
-                        break;
+                    Console.Clear();
+                    Console.WriteLine("What transaction would you like to make?");
+                    Console.WriteLine();
+                    Console.WriteLine("1) View Balance ");
+                    Console.WriteLine("2) Withdraw Money");
+                    Console.WriteLine("3) Deposit Money ");
+                    string input = Console.ReadLine();
+
+                    switch (input)
+                    {
+                        case "1":
+                            ViewBalance();
+                            Console.ReadLine();
+                            break;
+                        case "2":
+                            WithdrawMoney();
+                            Console.ReadLine();
+                            break;
+                        case "3":
+                            DepositMoney();
+                            Console.ReadLine();
+                            break;
+                    }
                 }
+                else if (start == "n")
+                    Environment.Exit(0);
             }
-            else if (start == "n")
-                Environment.Exit(0);
+            catch (Exception e)
+            {
+                Console.WriteLine($"You've hit the following exception: {e.Message}.");
+                Console.ReadLine();
+            }
         }
 
         public static decimal ViewBalance()
@@ -72,10 +79,14 @@ namespace Lab02_ATM
             }
             catch (Exception e)
             {
-                Console.WriteLine($"You've hit the following exception: {e.Message}. Try again.");
+                throw;
+               
             }
-       
-            return Balance;
+            finally
+            {
+                Console.WriteLine($"You're current account balance is ${Balance}.");
+            }
+
         }
 
         public static decimal DepositMoney()
@@ -90,14 +101,15 @@ namespace Lab02_ATM
             }
             catch (Exception e)
             {
-                Console.WriteLine($"You've hit the following exception: {e.Message}.");
+                throw;
                 
             }
             finally
             {
                 Console.WriteLine($"You're current account balance is ${Balance}.");
+                
             }
-            return Balance;
+            
         }
     }
 }
