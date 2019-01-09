@@ -42,7 +42,6 @@ namespace Lab02_ATM
                         break;
                     case "3":
                         DepositMoney();
-                        Console.WriteLine($"You're current account balance is ${Balance}.");
                         Console.ReadLine();
                         break;
                 }
@@ -54,38 +53,51 @@ namespace Lab02_ATM
         public static decimal ViewBalance()
         {
             decimal currentBalance = Balance;
-            Console.WriteLine($"Current balance: {currentBalance}");
+            Console.WriteLine($"Current balance: ${currentBalance}");
             return currentBalance;
         }
         public static decimal WithdrawMoney()
         {
-            Console.WriteLine("How much money would you like to withdraw?");
-            string input = Console.ReadLine();
-            decimal withdraw = Int32.Parse(input);
-            if (Balance - withdraw > 0)
-                Balance = Balance - withdraw;
-            else if (Balance - withdraw < 0)
-                Console.WriteLine("I'm sorry but the follow transactin will result in negative balance. Please deposit money first.");
+            decimal newBalance = Balance;
+            try
+            {
+                Console.WriteLine("How much money would you like to withdraw?");
+                string input = Console.ReadLine();
+                decimal withdraw = Int32.Parse(input);
+                if (Balance - withdraw > 0)
+                    Balance = Balance - withdraw;
+                else if (Balance - withdraw < 0)
+                    Console.WriteLine("I'm sorry but the follow transactin will result in negative balance. Please deposit money first.");
+                return newBalance;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"You've hit the following exception: {e.Message}. Try again.");
+            }
+       
             return Balance;
         }
 
         public static decimal DepositMoney()
         {
-            decimal newBalance = 0;
             try
             {
                 Console.WriteLine("How much money would you like to deposit?");
                 string input = Console.ReadLine();
                 decimal deposit = Int32.Parse(input);
-                newBalance = Balance + deposit;
+                Balance = Balance + deposit;
                 return Balance;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"You've hit the following exception: {e.Message}. Try again.");
-
+                Console.WriteLine($"You've hit the following exception: {e.Message}.");
+                
             }
-            return newBalance;
+            finally
+            {
+                Console.WriteLine($"You're current account balance is ${Balance}.");
+            }
+            return Balance;
         }
     }
 }
