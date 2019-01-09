@@ -47,12 +47,12 @@ namespace Lab02_ATM
                             Console.ReadLine();
                             break;
                         case "2":
-                            decimal wMoney = WithdrawMoney();
+                            decimal wMoney = WithdrawMoney(GetWithdrawMoney());
                             Console.WriteLine($"Current balance: ${wMoney}");
                             Console.ReadLine();
                             break;
                         case "3":
-                        decimal dMoney = DepositMoney();
+                        decimal dMoney = DepositMoney(GetDepositMoney());
                         Console.WriteLine($"Current balance: ${dMoney}");
                         Console.ReadLine();
                         break;
@@ -100,9 +100,9 @@ namespace Lab02_ATM
             }
         }
 
-        public static decimal WithdrawMoney()
+        public static decimal WithdrawMoney(decimal withdraw)
         {
-            decimal withdraw = GetWithdrawMoney();
+  
             if (Balance - withdraw > 0)
             {
                 Balance = Balance - withdraw;
@@ -138,10 +138,9 @@ namespace Lab02_ATM
                 throw;
             }
         }
-        public static decimal DepositMoney()
+        public static decimal DepositMoney(decimal deposit)
         {
 
-                decimal deposit = GetDepositMoney();
                 Balance = Balance + deposit;
                 return Balance;         
         }
