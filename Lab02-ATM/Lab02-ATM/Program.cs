@@ -41,8 +41,8 @@ namespace Lab02_ATM
                         Console.ReadLine();
                         break;
                     case "3":
-                        //decimal accountBalance = ViewBalance(num);
-                        Console.WriteLine($"Your current account balance is: ${Balance}");
+                        DepositMoney();
+                        Console.WriteLine($"You're current account balance is ${Balance}.");
                         Console.ReadLine();
                         break;
                 }
@@ -66,6 +66,13 @@ namespace Lab02_ATM
             return Balance;
         }
 
-        public static decimal 
+        public static decimal DepositMoney()
+        {
+            Console.WriteLine("How much money would you like to deposit?");
+            string input = Console.ReadLine();
+            decimal deposit = Int32.Parse(input);
+            Balance = Balance + deposit;
+            return Balance;
+        }
     }
 }
