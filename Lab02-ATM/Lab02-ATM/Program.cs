@@ -62,17 +62,30 @@ namespace Lab02_ATM
             Console.WriteLine("How much money would you like to withdraw?");
             string input = Console.ReadLine();
             decimal withdraw = Int32.Parse(input);
-            Balance = Balance - withdraw;
+            if (Balance - withdraw > 0)
+                Balance = Balance - withdraw;
+            else if (Balance - withdraw < 0)
+                Console.WriteLine("I'm sorry but the follow transactin will result in negative balance. Please deposit money first.");
             return Balance;
         }
 
         public static decimal DepositMoney()
         {
-            Console.WriteLine("How much money would you like to deposit?");
-            string input = Console.ReadLine();
-            decimal deposit = Int32.Parse(input);
-            Balance = Balance + deposit;
-            return Balance;
+            decimal newBalance = 0;
+            try
+            {
+                Console.WriteLine("How much money would you like to deposit?");
+                string input = Console.ReadLine();
+                decimal deposit = Int32.Parse(input);
+                newBalance = Balance + deposit;
+                return Balance;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"You've hit the following exception: {e.Message}. Try again.");
+
+            }
+            return newBalance;
         }
     }
 }
