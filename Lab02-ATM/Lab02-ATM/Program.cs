@@ -2,7 +2,7 @@
 
 namespace Lab02_ATM
 {
-    class Program
+    public class Program
     {
         public static decimal Balance = 5000;
         static void Main(string[] args)
@@ -23,7 +23,7 @@ namespace Lab02_ATM
         }
         }
 
-        static void MainMenu()
+        public static void MainMenu()
         {
             Console.Clear();
             try
