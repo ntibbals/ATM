@@ -42,26 +42,35 @@ namespace Lab02_ATM
                     switch (input)
                     {
                         case "1":
-                            decimal vBalance = ViewBalance();
-                            Console.WriteLine($"Current balance: ${vBalance}");
+                            ViewBalance();
                             Console.ReadLine();
                             break;
                         case "2":
-                            decimal wMoney = WithdrawMoney(GetWithdrawMoney());
-                            Console.WriteLine($"Current balance: ${wMoney}");
-                            Console.ReadLine();
+                            WithdrawMoney(GetWithdrawMoney());
+                            ViewBalance();
+                             Console.ReadLine();
                             break;
                         case "3":
-                        decimal dMoney = DepositMoney(GetDepositMoney());
-                        Console.WriteLine($"Current balance: ${dMoney}");
-                        Console.ReadLine();
-                        break;
+                            DepositMoney(GetDepositMoney());
+                            ViewBalance();
+                            Console.ReadLine();
+                            break;
                         case "4":
                             Environment.Exit(0);
 
                             break;
                     }
 
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine($"You did not enter anything. Please try again.");
+                Console.ReadLine();
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to read format. Please try agian.");
+                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -70,14 +79,12 @@ namespace Lab02_ATM
             }
         }
 
-        public static decimal ViewBalance()
+        public static void ViewBalance()
         {
-            decimal currentBalance = Balance;
-            return currentBalance;
+            Console.WriteLine($"Current balance: ${Balance}");
         }
         public static decimal GetWithdrawMoney()
         {
-   
             try
             {
                 Console.WriteLine("How much money would you like to withdraw?");
