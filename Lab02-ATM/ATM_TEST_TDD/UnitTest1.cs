@@ -16,9 +16,9 @@ namespace ATM_TEST_TDD
 
         }
         [Fact]
-        public void TestDoesNotAcceptNegative()
+        public void TestDoesWithdrawMoreThanBalance()
         {
-            decimal testValue = (-500;
+            decimal testValue = 5500;
             decimal expectedValue = 5000;
             Program.Balance = 5000;
             Assert.Equal(expectedValue, Program.WithdrawMoney(testValue));
