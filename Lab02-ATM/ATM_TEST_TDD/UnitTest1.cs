@@ -32,7 +32,7 @@ namespace ATM_TEST_TDD
             string testValue = "500";
             decimal expectedValue = 500;
             Program.Balance = 5000;
-            Assert.Equal(expectedValue, Program.GetWithdrawMoney(testValue));
+            Assert.Equal(expectedValue, Program.ConvertUserInput(testValue));
         }
         [Fact]
         public void TestWithdrawConversionIfNegative()
@@ -41,7 +41,7 @@ namespace ATM_TEST_TDD
             string testValue = "-444";
             decimal expectedValue = 0;
             Program.Balance = 5000;
-            Assert.Equal(expectedValue, Program.GetWithdrawMoney(testValue));
+            Assert.Equal(expectedValue, Program.ConvertUserInput(testValue));
         }
 
         [Fact]
@@ -61,24 +61,6 @@ namespace ATM_TEST_TDD
             decimal expectedValue = 1000;
             Program.Balance = 5000;
             Assert.Equal(expectedValue, Program.DepositMoney(testValue));
-        }
-        [Fact]
-        public void TestDepositConversion()
-        {
-            //test to determine if the method will convert string to integer
-            string testValue = "777";
-            decimal expectedValue = 777;
-            Program.Balance = 5000;
-            Assert.Equal(expectedValue, Program.GetDepositMoney(testValue));
-        }
-        [Fact]
-        public void TestDepositConversionIfNegative()
-        {
-            //test to determine if the method will convert negative string to integer
-            string testValue = "-333";
-            decimal expectedValue = 0;
-            Program.Balance = 5000;
-            Assert.Equal(expectedValue, Program.GetDepositMoney(testValue));
         }
     }
 }
