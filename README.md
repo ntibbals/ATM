@@ -20,17 +20,17 @@
 
 - The end user is prompted if they would like to use our ATM. If y, the display menu will generate. If n, it will exit the applicaiton. The display menu allows the end user the ability to select actions through input of 1, 2, 3, or 4. 
 
-#Open Application
+# Open Application
 ![SCREENSHOT](https://github.com/ntibbals/Lab02-ATM/blob/master/open.PNG)
 
-#View Balance
+# View Balance
 ![SCREENSHOT](https://github.com/ntibbals/Lab02-ATM/blob/master/view-balance.PNG)
 
-#Withdraw
+# Withdraw
 ![SCREENSHOT](https://github.com/ntibbals/Lab02-ATM/blob/master/withdraw.PNG)
 
-#Deposit
+# Deposit
 ![SCREENSHOT](https://github.com/ntibbals/Lab02-ATM/blob/master/deposit.PNG)
 
-#Attempt to input negative number
+# Attempt to input negative number
 ![SCREENSHOT](https://github.com/ntibbals/Lab02-ATM/blob/master/negative.PNG)
