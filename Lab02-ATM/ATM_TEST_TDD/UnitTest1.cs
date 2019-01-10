@@ -35,6 +35,15 @@ namespace ATM_TEST_TDD
             Program.Balance = 5000;
             Assert.Equal(expectedValue, Program.DepositMoney(testValue));
         }
+        [Fact]
+        public void TestAddBalance()
+        {
+            //test to determine if the method with withdraw more than balance
+            decimal testValue = 4000;
+            decimal expectedValue = 9000;
+            Program.Balance = 5000;
+            Assert.Equal(expectedValue, Program.DepositMoney(testValue));
+        }
 
     }
 }

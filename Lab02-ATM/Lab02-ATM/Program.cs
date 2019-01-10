@@ -46,12 +46,12 @@ namespace Lab02_ATM
                             Console.ReadLine();
                             break;
                         case "2":
-                            WithdrawMoney(GetWithdrawMoney());
+                            WithdrawMoney(GetWithdrawMoney(AskWithdraw()));
                             ViewBalance();
                              Console.ReadLine();
                             break;
                         case "3":
-                            DepositMoney(GetDepositMoney());
+                            DepositMoney(GetDepositMoney(AskDeposit()));
                             ViewBalance();
                             Console.ReadLine();
                             break;
@@ -83,12 +83,17 @@ namespace Lab02_ATM
         {
             Console.WriteLine($"Current balance: ${Balance}");
         }
-        public static decimal GetWithdrawMoney()
+
+        public static string AskWithdraw()
+        {
+            Console.WriteLine("How much money would you like to withdraw?");
+            string input = Console.ReadLine();
+            return input;
+        }
+        public static decimal GetWithdrawMoney(string input)
         {
             try
             {
-                Console.WriteLine("How much money would you like to withdraw?");
-                string input = Console.ReadLine();
                 decimal invalid = 0;
                 decimal withdraw = Int32.Parse(input);
                 if (withdraw < 0)
@@ -120,14 +125,17 @@ namespace Lab02_ATM
             }
             return Balance;
         }
-
-        public static decimal GetDepositMoney()
+        public static string AskDeposit()
+        {
+            Console.WriteLine("How much money would you like to deposit?");
+            string input = Console.ReadLine();
+            return input;
+        }
+        public static decimal GetDepositMoney(string input)
         {
       
             try
             {
-                Console.WriteLine("How much money would you like to deposit?");
-                string input = Console.ReadLine();
                 decimal invalid = 0;
                 decimal deposit = Int32.Parse(input);
                 if (deposit < 0)
