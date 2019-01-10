@@ -25,6 +25,24 @@ namespace ATM_TEST_TDD
             Program.Balance = 5000;
             Assert.Equal(expectedValue, Program.WithdrawMoney(testValue));
         }
+        [Fact]
+        public void TestWithdrawConversion()
+        {
+            //test to determine if the method will convert string to integer
+            string testValue = "500";
+            decimal expectedValue = 500;
+            Program.Balance = 5000;
+            Assert.Equal(expectedValue, Program.GetWithdrawMoney(testValue));
+        }
+        [Fact]
+        public void TestWithdrawConversionIfNegative()
+        {
+            //test to determine if the method will return converted integer if given negative string
+            string testValue = "-444";
+            decimal expectedValue = 0;
+            Program.Balance = 5000;
+            Assert.Equal(expectedValue, Program.GetWithdrawMoney(testValue));
+        }
 
         [Fact]
         public void TestAddBalance()
@@ -36,14 +54,31 @@ namespace ATM_TEST_TDD
             Assert.Equal(expectedValue, Program.DepositMoney(testValue));
         }
         [Fact]
-        public void TestAddBalance()
+        public void TestNegativeAddBalance()
         {
-            //test to determine if the method with withdraw more than balance
-            decimal testValue = 4000;
-            decimal expectedValue = 9000;
+            //test to determine if the method wiill input negative integer and add
+            decimal testValue = -4000;
+            decimal expectedValue = 1000;
             Program.Balance = 5000;
             Assert.Equal(expectedValue, Program.DepositMoney(testValue));
         }
-
+        [Fact]
+        public void TestDepositConversion()
+        {
+            //test to determine if the method will convert string to integer
+            string testValue = "777";
+            decimal expectedValue = 777;
+            Program.Balance = 5000;
+            Assert.Equal(expectedValue, Program.GetDepositMoney(testValue));
+        }
+        [Fact]
+        public void TestDepositConversionIfNegative()
+        {
+            //test to determine if the method will convert negative string to integer
+            string testValue = "-333";
+            decimal expectedValue = 0;
+            Program.Balance = 5000;
+            Assert.Equal(expectedValue, Program.GetDepositMoney(testValue));
+        }
     }
 }
